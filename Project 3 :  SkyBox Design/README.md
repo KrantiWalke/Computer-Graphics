@@ -33,8 +33,9 @@ This project is a 3D graphics application developed using OpenGL and GLUT. It fe
 ## Running the Program
 
 Execute the compiled application:
+```
 ./Project3
-
+```
 
 ## Controls
 
