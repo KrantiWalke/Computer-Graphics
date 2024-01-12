@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1698203662 source:e:\kranti1\fall_2023\csci272_projects\assignment3kranti\main.cpp
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<math.h>
+	<SOIL.h>
+
+1693431925 e:\kranti1\fall_2023\csci272_projects\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1696281267 e:\kranti1\fall_2023\csci272_projects\common\include\soil.h
+
