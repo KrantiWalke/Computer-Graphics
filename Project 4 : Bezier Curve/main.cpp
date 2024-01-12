@@ -1,26 +1,24 @@
-/// Student Name: Kranti Walke
-/// Student ID : 301081860
-/// Course : CSCI 272 (Fall 2023)
-/// Assignment : Project #4 -Bezier Curve
+/// Author Name: Kranti Walke
+/// Project 4: Bezier Curve
 
 /*
 In this project I am following below instructions to draw Bezier Curve:
-            • Use given Framework to draw 3D (x,y,z) Bezier Curve and do the following
-            • Define initial maximum number of control points to 35 (program stop drawing after 35 clicks)
-            • Write function to calculate factorials
-            • Mark the control points on the screen for each left mouse click: use glPointSize(5);
+            â€¢ Use given Framework to draw 3D (x,y,z) Bezier Curve and do the following
+            â€¢ Define initial maximum number of control points to 35 (program stop drawing after 35 clicks)
+            â€¢ Write function to calculate factorials
+            â€¢ Mark the control points on the screen for each left mouse click: use glPointSize(5);
             (note: mouse click gives you only x,y values. For the z value assign random value in visible range for each click).
-            • Start drawing Bézier curve when number of control points reach 3 and beyond:
+            â€¢ Start drawing BÃ©zier curve when number of control points reach 3 and beyond:
             use glBegin(GL_POINTS) to plot the graph. Set glPointSize(2);
-            • Each click where n>3 must plot a unique Bézier curve Animate sphere move along the path
-            • Use right mouse click to toggle between hide/show control points
-            • Use middle mouse button or “space” key for reset the program
-            • Have Left key and Right key to rotate your whole scene around the Y-Axis
-            • Have repeated sphere animation by pressing “Enter” key
+            â€¢ Each click where n>3 must plot a unique BÃ©zier curve Animate sphere move along the path
+            â€¢ Use right mouse click to toggle between hide/show control points
+            â€¢ Use middle mouse button or â€œspaceâ€ key for reset the program
+            â€¢ Have Left key and Right key to rotate your whole scene around the Y-Axis
+            â€¢ Have repeated sphere animation by pressing â€œEnterâ€ key
 
 mouse and keys functionality:
             -> control points on the screen for each left mouse click
-            -> middle mouse button or “space” : press space key to reset everything and draw a new bizer curve
+            -> middle mouse button or â€œspaceâ€ : press space key to reset everything and draw a new bizer curve
             -> 'w' : to view the
             -> "Enter" : Enter key for restarting sphere animation
             -> Left key and Right key : to rotate your whole scene around the Y-Axis
@@ -64,7 +62,7 @@ const GLfloat high_shininess[] = { 100.0f };
 
 
 double Wwidth,Wheight; //Window width and height.
-vector<Point> controlPoints; //Stores control points for the Bézier curve.
+vector<Point> controlPoints; //Stores control points for the BÃ©zier curve.
 //Control the animation and display of control points.
 bool showControlPoints = true;
 double t = 0.0f; // Parameter for sphere's position on the curve
@@ -78,13 +76,13 @@ int factorial(double n) {
     return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
 }
 
-/// Compute a point on the Bézier curve based on the parameter t.
+/// Compute a point on the BÃ©zier curve based on the parameter t.
 Point calculateBezierPoint(double t) {
-    Point p = {0.0f, 0.0f, 0.0f};  //This point will store the computed coordinates (x, y, z) of the Bézier curve at parameter t.
+    Point p = {0.0f, 0.0f, 0.0f};  //This point will store the computed coordinates (x, y, z) of the BÃ©zier curve at parameter t.
     double n = controlPoints.size() - 1; //The degree is given by n = controlPoints.size() - 1;. This is based on the number of control points minus one.
     for (double i = 0; i <= n; i++) {
         //The loop runs from i = 0 to i = n (inclusive). Each iteration calculates a portion of the point's final coordinates based on the current control point.
-        double binomial = factorial(n) / (double)(factorial(i) * factorial(n - i)); //This is a part of the Bézier curve formula. It determines how much each control point influences the curve at parameter t. The binomial coefficient is calculated using the factorial function:
+        double binomial = factorial(n) / (double)(factorial(i) * factorial(n - i)); //This is a part of the BÃ©zier curve formula. It determines how much each control point influences the curve at parameter t. The binomial coefficient is calculated using the factorial function:
         double term = binomial * pow(t, i) * pow(1 - t, n - i); //This term uses the binomial coefficient, t raised to the power of i, and (1 - t) raised to the power of n - i.
         p.x += term * controlPoints[i].x; //For each control point, this term is multiplied by the control point's x, y, and z coordinates and added to the corresponding coordinates of point p.
         p.y += term * controlPoints[i].y;
@@ -117,7 +115,7 @@ static void resize(int width, int height)
  }
 
 
-/// The main rendering function. It clears the buffer, sets up the view, and draws the control points, Bézier curve, and a moving sphere along the curve.
+/// The main rendering function. It clears the buffer, sets up the view, and draws the control points, BÃ©zier curve, and a moving sphere along the curve.
 static void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -145,7 +143,7 @@ static void display(void)
         glEnd();
     }
 
-    /// Draw Bézier curve
+    /// Draw BÃ©zier curve
     /*  Checks if there are at least 3 control points.
         Sets up drawing state: glPointSize(2) for point size, and glLineWidth(3.0f) for line width.
         Draws the curve using GL_LINE_STRIP, which connects a series of points. The curve is computed point-by-point using calculateBezierPoint(t) within a loop from t = 0.0 to 1.0.*/
