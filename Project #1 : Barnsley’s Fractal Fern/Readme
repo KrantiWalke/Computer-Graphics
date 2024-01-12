@@ -21,13 +21,13 @@ Barnsley's Fractal Fern is a fascinating example of how mathematics can replicat
 1. Ensure you have OpenGL and GLUT installed on your system.
 2. Clone this repository.
 3. Compile the code. For example, on a Unix-based system, you might use:
-   ```
+   
    g++ -o barnsley_fern main.cpp -lGL -lGLU -lglut
-   ```
+   
 4. Run the executable:
-   ```
+   
    ./barnsley_fern
-   ```
+   
 
 ## Controls
 
