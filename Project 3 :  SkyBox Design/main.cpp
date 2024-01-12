@@ -1,7 +1,5 @@
 /// Name: Kranti Sambhaji Walke
-/// Student ID: 301081860
-/// Class: CSCI 272 (Fall 2023)
-/// Project Name : Assignment/Project 3 - SkyBox Design
+/// Project 3 - SkyBox Design
 
 
 #include <string.h>
@@ -323,7 +321,7 @@ void drawGround() {
 //which is essentially a large cube that surrounds the entire scene and provides the illusion of distant surroundings.
 
 static void drawSkyBox() {
-    glDisable(GL_LIGHTING); //This turns off lighting calculations. This is because the skybox typically doesn't need to react to scene lights – it just needs to display its textures as they are.
+    glDisable(GL_LIGHTING); //This turns off lighting calculations. This is because the skybox typically doesn't need to react to scene lights Â– it just needs to display its textures as they are.
 
     glColor3f(1.0f, 1.0f, 1.0f); //This sets the current drawing color to white. In the context of textured geometry, this means the texture will be drawn with its original colors, without any tint.
 
