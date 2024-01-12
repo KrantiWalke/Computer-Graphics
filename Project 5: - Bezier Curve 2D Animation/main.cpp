@@ -1,7 +1,5 @@
-/// Student Name: Kranti Walke
-/// Student ID : 301081860
-/// Course : CSCI 272 (Fall 2023)
-/// Assignment : Project #5 - Bezier Curve 2D Animation (using sprite sheet with animated character and parallax background)
+/// Author Name: Kranti Walke
+/// Project 5: Bezier Curve 2D Animation (using sprite sheet with animated character and parallax background)
 
 /*
 Description:
