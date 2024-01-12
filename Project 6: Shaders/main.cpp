@@ -1,7 +1,5 @@
-/// Student Name: Kranti Walke
-/// Student ID : 301081860
-/// Course : CSCI 272 (Fall 2023)
-/// Assignment : Project #6 - Shaders
+/// Author Name: Kranti Walke
+/// Project 6: Shaders
 
 
 ///Rendering Process:
