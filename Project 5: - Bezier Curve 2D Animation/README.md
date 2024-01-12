@@ -36,16 +36,16 @@ This project demonstrates a 2D animation of a sprite moving along a Bezier curve
 2. **Compile the code:**
 - For Linux/Mac:
   ```
-  g++ -o Project5 main.cpp -lGL -lGLU -lglut -lSOIL
+  g++ -o project5 main.cpp -lGL -lGLU -lglut -lSOIL
   ```
 - For Windows:
   ```
-  g++ -o Project5 main.cpp -lopengl32 -lglu32 -lfreeglut -lSOIL
+  g++ -o project5 main.cpp -lopengl32 -lglu32 -lfreeglut -lSOIL
   ```
 
 ### Execution
 
 Run the compiled application:
  ```
- ./Project5
+ ./project5
 ```
