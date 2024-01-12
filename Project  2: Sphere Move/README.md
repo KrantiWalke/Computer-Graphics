@@ -1,3 +1,5 @@
+# Project 2 - Sphere Move
+
 ## Features
 
 - 3D sphere simulation using OpenGL and GLUT.
@@ -25,8 +27,10 @@ To run this project, you need to have OpenGL and GLUT installed on your system. 
 
 ## Running the Program
 
-Execute the compiled application: ./sphere_move
-
+Execute the compiled application: 
+  ```
+  ./sphere_move
+  ```
 ## Controls
 
 - **Arrow Keys**: Rotate the scene.
