@@ -34,12 +34,3 @@ This repository contains a collection of projects demonstrating various aspects 
 ### Compilation and Running
 
 Each project folder contains specific instructions for compilation and execution. Please refer to the individual `README.md` files within each project directory for detailed steps.
-
-## Repository Structure
-
-- `[Project1/](https://github.com/KrantiWalke/Computer-Graphics/tree/main/Project%20%231%20%3A%20Barnsley%E2%80%99s%20Fractal%20Fern)`: Contains all files related to Project 1.
-- `[Project2/](https://github.com/KrantiWalke/Computer-Graphics/tree/main/Project%20%202%3A%20Sphere%20Move)`: Contains all files related to Project 2.
-- `[Project3/](https://github.com/KrantiWalke/Computer-Graphics/tree/main/Project%203%20%3A%20%20SkyBox%20Design)`: Contains all files related to Project 3.
-- `[Project4/](https://github.com/KrantiWalke/Computer-Graphics/tree/main/Project%204%20%3A%20Bezier%20Curve)`: Contains all files related to Project 4.
-- `[Project5/](https://github.com/KrantiWalke/Computer-Graphics/tree/main/Project%205%3A%20-%20Bezier%20Curve%202D%20Animation)`: Contains all files related to Project 5.
-- `[Project6/](https://github.com/KrantiWalke/Computer-Graphics/tree/main/Project%206%3A%20Shaders)`: Contains all files related to Project 6.
