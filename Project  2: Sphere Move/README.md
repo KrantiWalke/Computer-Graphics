@@ -29,7 +29,7 @@ To run this project, you need to have OpenGL and GLUT installed on your system. 
 
 Execute the compiled application: 
   ```
-  ./sphere_move
+  ./Project2
   ```
 ## Controls
 
