@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1701903412 source:e:\kranti1\fall_2023\csci272_projects\project6\main.cpp
+	<string.h>
+	<GL/glew.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+	<math.h>
+	<SOIL.h>
+	<fstream>
+
+1701839493 e:\kranti1\fall_2023\csci272_projects\common\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1693428325 e:\kranti1\fall_2023\csci272_projects\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1696277667 e:\kranti1\fall_2023\csci272_projects\common\include\soil.h
+

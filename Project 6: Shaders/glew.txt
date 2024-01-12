@@ -1,0 +1,343 @@
+#include <string.h>
+#define GLEW_STAIC
+#include<GL/glew.h>
+
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+#include <math.h>
+#include <SOIL.h>
+#include <fstream>
+
+#define PI 3.14159
+
+using namespace std;
+unsigned int vs,fs,program;
+
+float scl=1.0;
+
+bool WireFrame= false;
+float i=0;
+const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
+const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
+const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+const GLfloat light_position[] = { 2.0f, 5.0f, 5.0f, 0.0f };
+
+const GLfloat mat_ambient[]    = { 0.7f, 0.7f, 0.7f, 1.0f };
+const GLfloat mat_diffuse[]    = { 0.8f, 0.8f, 0.8f, 1.0f };
+const GLfloat mat_specular[]   = { 1.0f, 1.0f, 1.0f, 1.0f };
+const GLfloat high_shininess[] = { 100.0f };
+
+
+float xpos=0;
+float ypos=0;
+float Wwidth,Wheight;
+
+int RotateX=0;
+int RotateY=0;
+GLuint tex1;
+
+
+void readShaderFile(char* fileName, string &str)   // read your v.vs and f.fs text files
+{
+    ifstream in(fileName);
+    char tmp[1024];
+
+    if (!in.is_open())
+    {
+        cout<<"The File "<<fileName<<" - Not Found"<<endl;
+    }
+    else{
+        while(!in.eof())
+        {
+            in.getline(tmp,1024);
+            str+=tmp;
+            str+='\n';
+            cout<<tmp<<endl;
+        }
+    }
+}
+
+unsigned int loadShader(string& source,unsigned int mode)
+{
+
+        unsigned int id;
+        char error[1024];
+
+        id=glCreateShader(mode);
+
+        const char* cSrc=source.c_str();
+
+        glShaderSource(id,1,&cSrc,NULL);
+
+        glCompileShader(id);
+
+
+        glGetShaderInfoLog(id,1024,NULL,error);
+
+        cout << "Compile status: \n" << error << endl;
+
+        return id;
+
+}
+
+void initShader(char* vName,char* fName)
+{
+
+        string source;
+
+        readShaderFile(vName,source);
+        vs=loadShader(source,GL_VERTEX_SHADER);
+        source="";
+
+        readShaderFile(fName,source);
+        fs=loadShader(source,GL_FRAGMENT_SHADER);
+        source="";
+
+        program = glCreateProgram();
+        glAttachShader(program,vs);
+        glAttachShader(program,fs);
+
+        glLinkProgram(program);
+        //glUseProgram(program);
+        glDetachShader(program,vs);
+        glDetachShader(program,fs);
+
+}
+
+void TLoad(char* fileName,GLuint &tex)
+{
+
+    int width, height;
+    unsigned char* image;
+
+    glBindTexture(GL_TEXTURE_2D,tex);
+
+     image = SOIL_load_image(fileName, &width, &height, 0, SOIL_LOAD_RGBA);
+     if (!image)cout<<"Image not found  "<< fileName <<endl;
+
+     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+     SOIL_free_image_data(image);
+
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+}
+
+
+
+static void resize(int width, int height)
+{
+     double Ratio;
+
+     Wwidth = (float)width;
+     Wheight = (float)height;
+
+     Ratio= (double)width /(double)height;
+
+    glViewport(0,0,(GLsizei) width,(GLsizei) height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+	gluPerspective (45.0f,Ratio,0.1f, 100.0f);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+ }
+
+ static void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glUseProgram(program);
+
+    gluLookAt(0,0,10,0.0,0.0,0.0,0.0,1.0,100.0);
+
+    if(WireFrame)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);		//Draw Our Mesh In Wireframe Mesh
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);		//Toggle WIRE FRAME
+
+    glColor3f(1.0,0.0,0.0);
+
+    /*
+
+
+
+
+    */
+
+
+    glRotated(RotateX, 1, 0, 0);  //Rotate X using mouse
+    glRotated(RotateY, 0, 1, 0);  //Rotate Y using mouse
+    glBindTexture(GL_TEXTURE_2D,tex1);
+
+    glutSolidTeapot(2.0);
+    GLint loc = glGetUniformLocation(program,"scale");
+    if(loc !=-1)
+    {
+        glUniform1f(loc,scl);
+    }
+
+
+    glUseProgram(0);
+
+    glutSwapBuffers();
+}
+
+
+static void key(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+        case 27 :
+        case 'q':
+            exit(0);
+            break;
+
+        case 'w':
+            WireFrame =!WireFrame;
+            break;
+    }
+}
+
+void Specialkeys(int key, int x, int y)
+{
+    switch(key)
+    {
+        case GLUT_KEY_RIGHT:
+        break;
+    }
+  glutPostRedisplay();
+}
+
+
+static void idle(void)
+{
+    //Use parametric equation with t increment for xpos and ypos
+    //Don't need a loop
+    scl+=0.0005;
+    glutPostRedisplay();
+}
+
+
+
+void mouse(int btn, int state, int xPos, int yPos)
+{
+    float scale = 11*(Wwidth/Wheight);
+
+    switch(btn){
+        case GLUT_LEFT_BUTTON:   //Mouse Clicks
+
+            if(state==GLUT_DOWN){
+
+                //get new mouse coordinates for x,y
+                // use sale to match right
+            }
+            break;
+    }
+    glutPostRedisplay();
+};
+
+void mouseMove(int x, int y)
+{
+    static float prev_x =0.0;
+    static float prev_y =0.0;
+
+    prev_x = (float)x-prev_x;
+    prev_y = (float)y-prev_y;
+
+    if((abs((int)prev_x)>15)||(abs((int)prev_y)>15))
+    {
+        prev_x = (float)x;
+        prev_y = (float)y;
+        return;
+    }
+
+    RotateY = (RotateY+(int)prev_x)%360;
+    RotateX = (RotateX+(int)prev_y)%360;
+}
+
+
+
+static void init(void)
+{
+    //glEnable(GL_CULL_FACE);
+    //glCullFace(GL_BACK);
+
+    glewInit();
+    glClearColor(0.5f, 0.5f, 1.0f, 0.0f); // assign a color you like
+
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_COLOR_MATERIAL);
+
+    glEnable(GL_DEPTH_TEST);
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    glShadeModel(GL_SMOOTH);
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+    glMaterialfv(GL_FRONT, GL_AMBIENT,   mat_ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE,   mat_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR,  mat_specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_LIGHTING);
+
+    initShader("v1.vs","F1.fs");
+
+    glEnable(GL_TEXTURE_2D);
+    glGenTextures(1,&tex1);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    TLoad("images/flower.jpeg",tex1);
+
+}
+
+/* Program entry point */
+
+int main(int argc, char *argv[])
+{
+    glutInit(&argc, argv);
+
+    glutInitWindowSize(800,600);
+    glutInitWindowPosition(0,0);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+
+    glutCreateWindow("Project Assignment 5");
+    init();
+    glutReshapeFunc(resize);
+    glutDisplayFunc(display);
+    glutMouseFunc(mouse);
+    glutKeyboardFunc(key);
+    glutSpecialFunc(Specialkeys);
+  //  glutSpecialUpFunc(SpecialkeysUp);
+    glutMotionFunc(mouseMove);
+
+    glutIdleFunc(idle);
+
+    glutMainLoop();
+
+    glDeleteShader(vs);
+    glDeleteShader(fs);
+    glDeleteShader(program);
+
+    return EXIT_SUCCESS;
+}
