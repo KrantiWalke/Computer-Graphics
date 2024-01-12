@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project, developed by Kranti Walke for CSCI 272 (Fall 2023), showcases an interactive 3D Bezier Curve implementation using OpenGL and GLUT. It allows users to dynamically create and visualize Bezier curves by placing control points within a 3D environment.
+This project, showcases an interactive 3D Bezier Curve implementation using OpenGL and GLUT. It allows users to dynamically create and visualize Bezier curves by placing control points within a 3D environment.
 
 ## Features
 
