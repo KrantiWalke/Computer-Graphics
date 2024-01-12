@@ -1,8 +1,6 @@
 /*
 Name:Kranti Sambhaji Walke
-ID: 301081860
-Class: CSCI 272
-Project Name: Assignment 2 - Sphere Move
+Project 2 - Sphere Move
 */
 
 #include <string.h>
