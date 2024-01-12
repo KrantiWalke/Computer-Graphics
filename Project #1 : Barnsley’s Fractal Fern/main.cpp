@@ -1,7 +1,5 @@
 //Author: Kranti Sambhaji Walke
-//Student ID: 301081860
-//CSCI 272 (Fall 2023)
-//Computer Graphics Project #1 : Barnsley’s Fractal Fern
+//Computer Graphics Project #1 : Barnsleyâ€™s Fractal Fern
 
 
 #include <string.h>
